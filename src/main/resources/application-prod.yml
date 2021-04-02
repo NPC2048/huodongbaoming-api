@@ -8,8 +8,8 @@ spring:
   # 邮件配置
   mail:
     host: smtp.163.com
-#    username: npc2048@163.com
-#    password: 7654123geg
+    #    username: 邮箱
+    #    password: 密码
     port: 465
     # 开启 SSL 协议
     properties:

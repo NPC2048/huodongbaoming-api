@@ -9,9 +9,9 @@ spring:
   mail:
     host: smtp.163.com
     # 请在运行参数中指定
-    #    username: npc2048@163.com
+    #    username: 邮箱
     # 再运行参数中指定
-    #    password: 7654123geg
+    #    password: 密码
     port: 465
     # 开启 SSL 协议
     properties:

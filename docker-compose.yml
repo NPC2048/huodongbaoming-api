@@ -1,0 +1,27 @@
+version: "3"
+  services:
+    # 后端 api
+    huodongbaoming-api:
+      image: java:8
+      container_name: huodongbaoming-api
+      privileged: true
+      ports:
+        - 8082:8082
+      volumes:
+        - ./huodongbaoming.jar:/app.jar
+      environment:
+        - spring.profiles.active=prod
+        - spring.mail.username=邮箱用户名
+        - spring.mail.password=邮箱密码
+      command: java -jar -djava.security.egd /app.jar
+    # 前端
+    huodongbaoming-h5:
+      image: nginx
+      container_name: huodongbaoming-h5
+      privielged: true
+      ports:
+        - 8000:3001
+      volumes:
+        - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+        - ./dist:/usr/share/local/nginx/html
+        - ./logs:/var/nginx/log

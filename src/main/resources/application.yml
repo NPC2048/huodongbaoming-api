@@ -38,7 +38,7 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: assign_id
-      table-prefix: zuoshacai
+      table-prefix: hd
   configuration:
     map-underscore-to-camel-case: true
     use-actual-param-name: true

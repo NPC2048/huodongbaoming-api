@@ -1,0 +1,24 @@
+server:
+  port: 8082
+spring:
+  datasource:
+    url: jdbc:mysql://139.159.236.186:6600/huodongbaoming?pinGlobalTxToPhysicalConnection=true&autoReconnect=true&useUnicode=true&serverTimezone=GMT%2b8&useSSL=false&characterEncoding=utf-8
+    username: root
+    password: MySqlDev@#$123
+  # 邮件配置
+  mail:
+    host: smtp.163.com
+    # 请在运行参数中指定
+    #    username: npc2048@163.com
+    # 再运行参数中指定
+    #    password: 7654123geg
+    port: 465
+    # 开启 SSL 协议
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

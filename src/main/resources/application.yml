@@ -1,0 +1,45 @@
+server:
+  port: 8088
+spring:
+  application:
+    name: 活动预约
+  main:
+    allow-bean-definition-overriding: true
+  # sa-token 配置
+  sa-token:
+    # token 名称
+    token-name: Bearer
+    # token 有效期
+    timeout: -1
+    # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
+    activity-timeout: -1
+    # 是否允许同一账号并发登录
+    allow-concurrent-login: false
+    is-share: false
+    # token 风格
+    token-style: uuid
+  # 数据源默认配置
+  datasource:
+    hikari:
+      # 最小连接数
+      minimum-idle: 3
+      # 最大连接数
+      maximum-pool-size: 20
+      # 允许闲置的最长时间 ms
+      idle-timeout: 30000
+      # 池中连接最长生命周期
+      max-lifetime: 180000
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    default-property-inclusion: non_null
+  profiles:
+    active: dev
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: assign_id
+      table-prefix: zuoshacai
+  configuration:
+    map-underscore-to-camel-case: true
+    use-actual-param-name: true
+    cache-enabled: false

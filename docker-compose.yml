@@ -13,7 +13,7 @@ version: "3"
         - spring.profiles.active=prod
         - spring.mail.username=邮箱用户名
         - spring.mail.password=邮箱密码
-      command: java -jar -djava.security.egd /app.jar
+      command: java -jar /app.jar
     # 前端
     huodongbaoming-h5:
       image: nginx

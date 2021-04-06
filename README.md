@@ -43,11 +43,18 @@
 
 ***
 
+### 环境
+
+* ide(idea, eclipse, vscode, ...)
+* jdk 8
+* mysql 8
+
 ### 前置条件
 
 * 配置邮件参数：JVM参数配置邮件服务器地址，用户名、密码等参数
 
-> 例如: * -Dspring.mail.username=邮箱服务器 -Dspring.mail.password=密码
+> 例如: * -Dspring.mail.username=邮箱服务器 
+> -Dspring.mail.password=密码
 > -Dspring.mail.host=服务器地址[可选，默认 stmp.163.com] -Dspring.mail.port=端口[可选，默认443]
 
 ### 以开发模式运行
@@ -58,6 +65,6 @@
 
 * 将项目打包
 
-> java -jar -djava.security.egd huodongbaoming.jar
+> java -jar huodongbaoming.jar
 
 

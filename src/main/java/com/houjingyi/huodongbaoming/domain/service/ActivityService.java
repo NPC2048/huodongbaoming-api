@@ -8,6 +8,8 @@ import com.houjingyi.huodongbaoming.common.form.activity.ActivityQueryForm;
 import com.houjingyi.huodongbaoming.domain.entity.Activity;
 import com.houjingyi.huodongbaoming.domain.entity.UserActivity;
 import com.houjingyi.huodongbaoming.domain.model.vo.ActivityVO;
+import com.houjingyi.huodongbaoming.domain.model.vo.UserEmailVO;
+import com.houjingyi.huodongbaoming.domain.model.vo.UserinfoVO;
 import com.houjingyi.huodongbaoming.domain.service.base.BaseService;
 
 import java.util.List;
@@ -53,4 +55,11 @@ public interface ActivityService extends BaseService<Activity> {
      */
     boolean publish(ActivityPublishForm form);
 
+    /**
+     * 根据活动 id 查找对应的用户名与联系信息
+     *
+     * @param id 活动 id
+     * @return List
+     */
+    List<UserEmailVO> listUserEmail(Long id);
 }

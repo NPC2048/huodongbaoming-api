@@ -10,10 +10,13 @@ import com.houjingyi.huodongbaoming.common.form.activity.ActivityQueryForm;
 import com.houjingyi.huodongbaoming.domain.entity.Activity;
 import com.houjingyi.huodongbaoming.domain.mapper.ActivityMapper;
 import com.houjingyi.huodongbaoming.domain.model.vo.ActivityVO;
+import com.houjingyi.huodongbaoming.domain.model.vo.UserEmailVO;
 import com.houjingyi.huodongbaoming.domain.service.ActivityService;
 import com.houjingyi.huodongbaoming.domain.service.base.impl.BaseServiceImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author yuelong.liang
@@ -51,6 +54,11 @@ public class ActivityServiceImpl extends BaseServiceImpl<ActivityMapper, Activit
         // 关联用户
         entity.setPublishUser(StpUtil.getLoginIdAsLong());
         return this.save(entity);
+    }
+
+    @Override
+    public List<UserEmailVO> listUserEmail(Long id) {
+        return baseMapper.listUserEmail(id);
     }
 
 }

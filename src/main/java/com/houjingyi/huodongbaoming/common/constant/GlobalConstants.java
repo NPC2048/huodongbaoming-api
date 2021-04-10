@@ -32,4 +32,9 @@ public interface GlobalConstants {
      */
     String ADMIN_NAME = "admin";
 
+    /**
+     * 管理员角色名
+     */
+    String ADMIN_ROLE = "admin";
+
 }

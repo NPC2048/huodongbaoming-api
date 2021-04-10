@@ -7,20 +7,22 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.houjingyi.huodongbaoming.common.enums.ActivityStatusEnums;
 import com.houjingyi.huodongbaoming.common.enums.ResultCodeEnum;
 import com.houjingyi.huodongbaoming.common.form.AppDataForm;
+import com.houjingyi.huodongbaoming.common.form.AppValidForm;
 import com.houjingyi.huodongbaoming.common.form.activity.ActivityPublishForm;
 import com.houjingyi.huodongbaoming.common.form.activity.ActivityQueryForm;
 import com.houjingyi.huodongbaoming.common.result.R;
 import com.houjingyi.huodongbaoming.domain.entity.Activity;
 import com.houjingyi.huodongbaoming.domain.manage.ActivityManage;
 import com.houjingyi.huodongbaoming.domain.model.vo.ActivityVO;
+import com.houjingyi.huodongbaoming.domain.model.vo.UserEmailVO;
 import com.houjingyi.huodongbaoming.domain.service.ActivityService;
-import com.houjingyi.huodongbaoming.domain.service.UserActivityService;
 import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * 活动 Controller
@@ -88,6 +90,22 @@ public class ActivityController {
         form.setUserId(StpUtil.getLoginIdAsLong());
         IPage<ActivityVO> page = activityService.pageBySignedUp(form, form);
         return R.success(page);
+    }
+
+    /**
+     * 根据活动 id 查询对应用户名和联系邮箱
+     *
+     * @param form 活动id表单
+     * @return R
+     */
+    @PostMapping("/list-user")
+    public R listUser(@Valid @RequestBody AppValidForm<Long> form) {
+        Activity activity = activityService.getById(form.getData());
+        if (activity == null) {
+            return R.failed("该活动不存在");
+        }
+        List<UserEmailVO> list = activityService.listUserEmail(form.getData());
+        return R.success(list);
     }
 
     /**

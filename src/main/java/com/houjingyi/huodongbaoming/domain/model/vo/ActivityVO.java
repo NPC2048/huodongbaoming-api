@@ -5,6 +5,7 @@ import com.houjingyi.huodongbaoming.common.constant.DateConstants;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * 活动 VO
@@ -42,4 +43,9 @@ public class ActivityVO implements IVO {
      * 联系邮箱
      */
     private String email;
+
+    /**
+     * 报名用户与联系方式
+     */
+    private List<UserEmailVO> listUser;
 }

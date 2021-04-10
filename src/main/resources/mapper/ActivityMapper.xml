@@ -25,6 +25,8 @@
         <result property="acAreaName" column="ac_area_name"/>
         <result property="publisher" column="publisher"/>
         <result property="email" column="email"/>
+        <collection property="listUser" ofType="com.houjingyi.huodongbaoming.domain.model.vo.UserEmailVO"
+                    select="listUserEmail" column="id"/>
     </resultMap>
     <select id="page" resultMap="resultVO">
         select hd_activity.id,
@@ -66,5 +68,12 @@
             and a.status = #{form.status}
         </if>
         order by a.update_time, a.create_time desc
+    </select>
+
+    <select id="listUserEmail" resultType="com.houjingyi.huodongbaoming.domain.model.vo.UserEmailVO">
+        select u.name, u.email, u.id
+        from (select user_id from hd_user_activity where activity_id = #{id}) ua,
+             hd_user u
+        where ua.user_id = u.id
     </select>
 </mapper>

@@ -7,7 +7,10 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.houjingyi.huodongbaoming.common.form.activity.ActivityQueryForm;
 import com.houjingyi.huodongbaoming.domain.entity.Activity;
 import com.houjingyi.huodongbaoming.domain.model.vo.ActivityVO;
+import com.houjingyi.huodongbaoming.domain.model.vo.UserEmailVO;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 活动 Mapper
@@ -33,5 +36,13 @@ public interface ActivityMapper extends BaseMapper<Activity> {
      * @return IPage
      */
     IPage<ActivityVO> pageBySignedUp(IPage<Activity> page, @Param("form") ActivityQueryForm form);
+
+    /**
+     * 根据活动 id 查询用户名与邮箱
+     *
+     * @param id id
+     * @return List
+     */
+    List<UserEmailVO> listUserEmail(Long id);
 
 }

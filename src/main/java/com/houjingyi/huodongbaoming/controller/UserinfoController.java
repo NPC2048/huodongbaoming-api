@@ -10,6 +10,7 @@ import com.houjingyi.huodongbaoming.common.form.user.ModifyUserinfoForm;
 import com.houjingyi.huodongbaoming.common.result.R;
 import com.houjingyi.huodongbaoming.domain.entity.User;
 import com.houjingyi.huodongbaoming.domain.model.vo.UserinfoVO;
+import com.houjingyi.huodongbaoming.domain.service.RoleService;
 import com.houjingyi.huodongbaoming.domain.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.util.DigestUtils;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * 用户信息 controller
@@ -31,6 +33,8 @@ import java.nio.charset.StandardCharsets;
 public class UserinfoController {
 
     private final UserService userService;
+
+    private final RoleService roleService;
 
     private final UserConverter userConverter;
 
@@ -47,7 +51,11 @@ public class UserinfoController {
     @PostMapping("/modify-userinfo")
     public R submit(@RequestBody ModifyUserinfoForm form) {
         User user = userService.getById(StpUtil.getLoginIdAsString());
-        if (GlobalConstants.ADMIN_NAME.equals(user.getName())) {
+        List<String> roleList = roleService.listRoleNameByUserId(user.getId());
+        if (GlobalConstants.ADMIN_NAME.equals(user.getName())
+                && !GlobalConstants.ADMIN_NAME.equals(form.getName())
+                && roleList.contains(GlobalConstants.ADMIN_ROLE)
+        ) {
             return R.failed(ResultCodeEnum.VALID_ERR, "admin 账号不可更改名称");
         }
         // 更新字段

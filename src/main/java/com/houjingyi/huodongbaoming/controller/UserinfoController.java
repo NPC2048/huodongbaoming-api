@@ -58,6 +58,10 @@ public class UserinfoController {
         ) {
             return R.failed(ResultCodeEnum.VALID_ERR, "admin 账号不可更改名称");
         }
+        // 用户名唯一检测
+        if (userService.existsName(form.getName())) {
+            return R.failed("该用户名已存在: " + form.getName());
+        }
         // 更新字段
         boolean result = userService.lambdaUpdate().set(User::getName, form.getName())
                 .set(true, User::getGender, form.getGender())

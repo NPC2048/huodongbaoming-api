@@ -11,6 +11,7 @@ import com.houjingyi.huodongbaoming.common.form.AppValidForm;
 import com.houjingyi.huodongbaoming.common.form.activity.ActivityPublishForm;
 import com.houjingyi.huodongbaoming.common.form.activity.ActivityQueryForm;
 import com.houjingyi.huodongbaoming.common.result.R;
+import com.houjingyi.huodongbaoming.common.result.Results;
 import com.houjingyi.huodongbaoming.domain.entity.Activity;
 import com.houjingyi.huodongbaoming.domain.manage.ActivityManage;
 import com.houjingyi.huodongbaoming.domain.model.vo.ActivityVO;
@@ -57,7 +58,7 @@ public class ActivityController {
         }
         wrapper.orderByDesc(Activity::getUpdateTime).orderByDesc(Activity::getCreateTime);
         IPage<ActivityVO> page = activityService.page(form, wrapper);
-        return R.success(page);
+        return Results.success(page);
     }
 
 
@@ -76,7 +77,7 @@ public class ActivityController {
         }
         wrapper.orderByDesc(Activity::getUpdateTime).orderByDesc(Activity::getCreateTime);
         IPage<ActivityVO> page = activityService.page(form, wrapper);
-        return R.success(page);
+        return Results.success(page);
     }
 
     /**
@@ -89,7 +90,7 @@ public class ActivityController {
     public R signedUpActivity(@RequestBody ActivityQueryForm form) {
         form.setUserId(StpUtil.getLoginIdAsLong());
         IPage<ActivityVO> page = activityService.pageBySignedUp(form, form);
-        return R.success(page);
+        return Results.success(page);
     }
 
     /**
@@ -102,10 +103,10 @@ public class ActivityController {
     public R listUser(@Valid @RequestBody AppValidForm<Long> form) {
         Activity activity = activityService.getById(form.getData());
         if (activity == null) {
-            return R.failed("该活动不存在");
+            return Results.failed("该活动不存在");
         }
         List<UserEmailVO> list = activityService.listUserEmail(form.getData());
-        return R.success(list);
+        return Results.success(list);
     }
 
     /**
@@ -116,7 +117,7 @@ public class ActivityController {
      */
     @GetMapping("/view")
     public R view(@RequestParam("id") Long id) {
-        return R.success(activityService.view(id));
+        return Results.success(activityService.view(id));
     }
 
     /**
@@ -128,10 +129,10 @@ public class ActivityController {
     @PostMapping("/signup")
     public R signup(@RequestBody AppDataForm<Long> form) {
         if (form.getData() == null) {
-            return R.failed(ResultCodeEnum.VALID_ERR, "id不能为空");
+            return Results.failed(ResultCodeEnum.VALID_ERR, "id不能为空");
         }
         activityManage.signup(form.getData());
-        return R.SUCCESS;
+        return Results.success();
     }
 
     /**
@@ -143,7 +144,7 @@ public class ActivityController {
     @PostMapping("/cancel")
     public R cancel(Long id) {
         activityManage.cancel(id);
-        return R.SUCCESS;
+        return Results.success();
     }
 
     /**
@@ -157,7 +158,7 @@ public class ActivityController {
     public R signIn(Long id) {
         // 修改
         activityManage.signIn(id);
-        return R.SUCCESS;
+        return Results.success();
     }
 
     /**
@@ -168,7 +169,7 @@ public class ActivityController {
      */
     @PostMapping("/publish")
     public R publish(@Valid @RequestBody ActivityPublishForm form) {
-        return R.state(activityService.publish(form));
+        return Results.state(activityService.publish(form));
     }
 
 }

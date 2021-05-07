@@ -2,7 +2,6 @@ package com.houjingyi.huodongbaoming.domain.service;
 
 import com.houjingyi.huodongbaoming.domain.entity.Role;
 import com.houjingyi.huodongbaoming.domain.service.base.BaseService;
-import com.houjingyi.huodongbaoming.domain.service.base.BaseVoService;
 
 import java.io.Serializable;
 import java.util.List;

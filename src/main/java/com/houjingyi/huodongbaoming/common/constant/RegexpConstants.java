@@ -5,8 +5,11 @@ package com.houjingyi.huodongbaoming.common.constant;
  *
  * @author yuelong.liang
  */
-public interface RegexpConstants {
+public class RegexpConstants {
 
-    String EMAIL = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
+    private RegexpConstants() {
+    }
+
+    public static final String EMAIL = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
 
 }

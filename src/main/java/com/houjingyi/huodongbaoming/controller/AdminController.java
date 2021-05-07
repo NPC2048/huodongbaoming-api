@@ -8,6 +8,7 @@ import com.houjingyi.huodongbaoming.common.exception.NoLogException;
 import com.houjingyi.huodongbaoming.common.form.AppDataForm;
 import com.houjingyi.huodongbaoming.common.form.activity.ActivityQueryForm;
 import com.houjingyi.huodongbaoming.common.result.R;
+import com.houjingyi.huodongbaoming.common.result.Results;
 import com.houjingyi.huodongbaoming.domain.entity.Activity;
 import com.houjingyi.huodongbaoming.domain.service.ActivityService;
 import lombok.AllArgsConstructor;
@@ -54,7 +55,7 @@ public class AdminController {
             wrapper.eq(Activity::getStatus, form.getStatus());
         }
         wrapper.orderByDesc(Activity::getUpdateTime).orderByDesc(Activity::getCreateTime);
-        return R.success(activityService.page(form, wrapper));
+        return Results.success(activityService.page(form, wrapper));
     }
 
     /**
@@ -66,7 +67,7 @@ public class AdminController {
     @PostMapping("/pass")
     public R pass(@RequestBody AppDataForm<List<Long>> form) {
         if (CollectionUtils.isEmpty(form.getData())) {
-            return R.failed(ResultCodeEnum.VALID_ERR, "请选择活动");
+            return Results.failed(ResultCodeEnum.VALID_ERR, "请选择活动");
         }
         List<Activity> activityList = activityService.listByIds(form.getData());
         // 修改状态
@@ -76,7 +77,7 @@ public class AdminController {
         });
         // 持久化到数据库
         activityService.updateBatchById(activityList);
-        return R.SUCCESS;
+        return Results.success();
     }
 
     /**
@@ -88,7 +89,7 @@ public class AdminController {
     @PostMapping("/refuse")
     public R refuse(@RequestBody AppDataForm<List<Long>> form) {
         if (CollectionUtils.isEmpty(form.getData())) {
-            return R.failed(ResultCodeEnum.VALID_ERR, "请选择活动");
+            return Results.failed(ResultCodeEnum.VALID_ERR, "请选择活动");
         }
         List<Activity> list = activityService.listByIds(form.getData());
         // 修改状态
@@ -101,7 +102,7 @@ public class AdminController {
         });
         // 持久化到数据库
         activityService.updateBatchById(list);
-        return R.SUCCESS;
+        return Results.success();
     }
 
     private void checkStatus(Activity activity) {

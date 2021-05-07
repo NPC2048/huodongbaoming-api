@@ -10,9 +10,9 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  *
  * @author yuelong.liang
  */
-@SpringBootApplication
 @EnableScheduling
 @MapperScan("com.houjingyi.huodongbaoming.domain.mapper")
+@SpringBootApplication
 public class HuodongbaomingApplication {
 
     public static void main(String[] args) {

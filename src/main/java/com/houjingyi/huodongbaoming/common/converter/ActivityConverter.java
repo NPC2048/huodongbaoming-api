@@ -1,12 +1,10 @@
 package com.houjingyi.huodongbaoming.common.converter;
 
-import com.houjingyi.huodongbaoming.common.enums.ActivityStatusEnums;
 import com.houjingyi.huodongbaoming.common.form.activity.ActivityPublishForm;
 import com.houjingyi.huodongbaoming.domain.entity.Activity;
 import com.houjingyi.huodongbaoming.domain.model.vo.ActivityVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 
 /**
  * 活动 Converter
@@ -22,9 +20,7 @@ public interface ActivityConverter {
      * @param entity 实体类
      * @return VO
      */
-    @Mappings({
-            @Mapping(target = "id", source = "id")
-    })
+    @Mapping(target = "id", source = "id")
     ActivityVO toVO(Activity entity);
 
     /**
@@ -33,10 +29,8 @@ public interface ActivityConverter {
      * @param form 发布表单
      * @return 实体类
      */
-    @Mappings({
-            @Mapping(target = "num", constant = "1"),
-            @Mapping(target = "status", constant = "0")
-    })
+    @Mapping(target = "num", constant = "1")
+    @Mapping(target = "status", constant = "0")
     Activity toEntity(ActivityPublishForm form);
 
 }

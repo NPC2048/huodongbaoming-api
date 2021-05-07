@@ -8,6 +8,7 @@ import com.houjingyi.huodongbaoming.common.enums.ResultCodeEnum;
 import com.houjingyi.huodongbaoming.common.form.user.ModifyPassForm;
 import com.houjingyi.huodongbaoming.common.form.user.ModifyUserinfoForm;
 import com.houjingyi.huodongbaoming.common.result.R;
+import com.houjingyi.huodongbaoming.common.result.Results;
 import com.houjingyi.huodongbaoming.domain.entity.User;
 import com.houjingyi.huodongbaoming.domain.model.vo.UserinfoVO;
 import com.houjingyi.huodongbaoming.domain.service.RoleService;
@@ -45,7 +46,7 @@ public class UserinfoController {
         String url = "https://study5.icanokok.com/avatar/" + emailMd5 + "?s=64&d=identicon";
         UserinfoVO vo = userConverter.toVO(user);
         vo.setGratavar(url);
-        return R.success(vo);
+        return Results.success(vo);
     }
 
     @PostMapping("/modify-userinfo")
@@ -56,38 +57,38 @@ public class UserinfoController {
                 && !GlobalConstants.ADMIN_NAME.equals(form.getName())
                 && roleList.contains(GlobalConstants.ADMIN_ROLE)
         ) {
-            return R.failed(ResultCodeEnum.VALID_ERR, "admin 账号不可更改名称");
+            return Results.failed(ResultCodeEnum.VALID_ERR, "admin 账号不可更改名称");
         }
         // 用户名唯一检测
         if (userService.existsName(form.getName())) {
-            return R.failed("该用户名已存在: " + form.getName());
+            return Results.failed("该用户名已存在: " + form.getName());
         }
         // 更新字段
         boolean result = userService.lambdaUpdate().set(User::getName, form.getName())
                 .set(true, User::getGender, form.getGender())
                 .ge(User::getId, user.getId()).update();
-        return R.state(result);
+        return Results.state(result);
     }
 
     @PostMapping("/modify-pass")
     public R modifyPass(@RequestBody ModifyPassForm form) {
         // 校验密码输入
         if (!form.getNewPass().equals(form.getConfirmPass())) {
-            return R.failed(ResultCodeEnum.VALID_ERR, "两次密码输入不一致");
+            return Results.failed(ResultCodeEnum.VALID_ERR, "两次密码输入不一致");
         }
         if (form.getNewPass().equals(form.getOldPass())) {
-            return R.failed(ResultCodeEnum.VALID_ERR, "新密码不能与旧密码相同");
+            return Results.failed(ResultCodeEnum.VALID_ERR, "新密码不能与旧密码相同");
         }
         User user = userService.getById(StpUtil.getLoginIdAsString());
         // 校验旧密码
 
         if (!user.getPassword().equals(DigestUtil.sha256Hex(form.getOldPass()))) {
-            return R.failed("旧密码错误");
+            return Results.failed("旧密码错误");
         }
         // 修改密码
         user.setPassword(DigestUtil.sha256Hex(form.getNewPass()));
         this.userService.updateById(user);
-        return R.SUCCESS;
+        return Results.success();
     }
 
     /**
@@ -100,7 +101,7 @@ public class UserinfoController {
     public R avatarUrl(@NotBlank(message = "邮箱不能为空") String email) {
         String emailMd5 = DigestUtils.md5DigestAsHex(email.getBytes(StandardCharsets.UTF_8));
         String url = "https://study5.icanokok.com/avatar/" + emailMd5 + "?s=64&d=identicon";
-        return R.success(url);
+        return Results.success(url);
     }
 
 

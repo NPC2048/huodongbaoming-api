@@ -1,6 +1,5 @@
 package com.houjingyi.huodongbaoming.domain.service.impl;
 
-import cn.dev33.satoken.stp.StpUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.houjingyi.huodongbaoming.common.constant.GlobalConstants;
 import com.houjingyi.huodongbaoming.domain.entity.Activity;

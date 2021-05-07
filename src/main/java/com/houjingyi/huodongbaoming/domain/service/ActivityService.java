@@ -1,15 +1,12 @@
 package com.houjingyi.huodongbaoming.domain.service;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.houjingyi.huodongbaoming.common.form.activity.ActivityPublishForm;
 import com.houjingyi.huodongbaoming.common.form.activity.ActivityQueryForm;
 import com.houjingyi.huodongbaoming.domain.entity.Activity;
-import com.houjingyi.huodongbaoming.domain.entity.UserActivity;
 import com.houjingyi.huodongbaoming.domain.model.vo.ActivityVO;
 import com.houjingyi.huodongbaoming.domain.model.vo.UserEmailVO;
-import com.houjingyi.huodongbaoming.domain.model.vo.UserinfoVO;
 import com.houjingyi.huodongbaoming.domain.service.base.BaseService;
 
 import java.util.List;

@@ -2,7 +2,6 @@ package com.houjingyi.huodongbaoming.auth;
 
 import cn.dev33.satoken.stp.StpInterface;
 import cn.dev33.satoken.stp.StpUtil;
-import cn.hutool.json.JSONUtil;
 import com.houjingyi.huodongbaoming.common.constant.GlobalConstants;
 import com.houjingyi.huodongbaoming.common.util.AuthUtil;
 import com.houjingyi.huodongbaoming.domain.service.RoleService;

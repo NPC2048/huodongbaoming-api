@@ -1,14 +1,17 @@
 package com.houjingyi.huodongbaoming.common.constant;
 
 /**
- * 日期相关常量类
+ * 日期常量类
  *
  * @author yuelong.liang
  */
-public interface DateConstants {
+public final class DateConstants {
 
-    String DEFAULT = "yyyy-MM-dd HH:mm:ss";
+    private DateConstants() {
+    }
 
-    String DEFAULT_DATE = "yyyy-MM-dd";
+    public static final String DEFAULT = "yyyy-MM-dd HH:mm:ss";
+
+    public static final String DEFAULT_DATE = "yyyy-MM-dd";
 
 }

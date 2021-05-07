@@ -1,5 +1,6 @@
 package com.houjingyi.huodongbaoming.config;
 
+import com.houjingyi.huodongbaoming.common.exception.BusinessException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -27,10 +28,10 @@ public class MailConfig implements InitializingBean {
         log.info("==== 邮件服务器用户名: " + mailProperties.getUsername());
         log.info("==== 邮件服务器密码: " + mailProperties.getPassword());
         if (StringUtils.isEmpty(mailProperties.getUsername())) {
-            throw new Exception("启动失败，请在配置文件或启动参数文件中配置邮件服务器用户");
+            throw new BusinessException("启动失败，请在配置文件或启动参数文件中配置邮件服务器用户");
         }
         if (StringUtils.isEmpty(mailProperties.getPassword())) {
-            throw new Exception("启动失败，请在配置文件或启动参数中配置又将服务器密码");
+            throw new BusinessException("启动失败，请在配置文件或启动参数中配置邮件服务器密码");
         }
     }
 }

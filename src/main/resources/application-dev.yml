@@ -7,7 +7,7 @@ spring:
     password: MySqlDev@#$123
   # 邮件配置
   mail:
-    host: smtp.163.com
+    host: smtp.qq.com
     # 请在运行参数中指定
     #    username: 邮箱
     # 再运行参数中指定

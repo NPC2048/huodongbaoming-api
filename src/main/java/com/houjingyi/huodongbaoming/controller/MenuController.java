@@ -2,6 +2,7 @@ package com.houjingyi.huodongbaoming.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
 import com.houjingyi.huodongbaoming.common.result.R;
+import com.houjingyi.huodongbaoming.common.result.Results;
 import com.houjingyi.huodongbaoming.domain.service.MenuService;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -32,9 +33,9 @@ public class MenuController {
     @GetMapping("/menus")
     public R menus() {
         if (!StpUtil.isLogin()) {
-            return R.success(Collections.emptyList());
+            return Results.success(Collections.emptyList());
         }
-        return R.success(menuService.listMenuByLoginId());
+        return Results.success(menuService.listMenuByLoginId());
     }
 
 }

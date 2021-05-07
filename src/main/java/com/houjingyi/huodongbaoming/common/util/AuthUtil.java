@@ -10,6 +10,9 @@ import com.houjingyi.huodongbaoming.common.constant.GlobalConstants;
  */
 public class AuthUtil {
 
+    private AuthUtil() {
+    }
+
     /**
      * 判断当前登录的用户是否为管理员
      *

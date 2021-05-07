@@ -26,7 +26,7 @@ public class MailUtils {
     private static MailProperties mailProperties;
 
     @Autowired(required = false)
-    public void setMailSender(JavaMailSender javaMailSender, MailProperties mailProperties) {
+    public synchronized void setMailSender(JavaMailSender javaMailSender, MailProperties mailProperties) {
         MailUtils.mailSender = javaMailSender;
         MailUtils.mailProperties = mailProperties;
     }

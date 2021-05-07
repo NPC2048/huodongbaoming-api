@@ -21,7 +21,7 @@ public enum ResultCodeEnum {
     LOGIN_TIMEOUT("5"),
     NOT_SUPPORT("405"),
     // 无权限访问
-    Forbidden("403"),
+    FORBIDDEN("403"),
     // 系统错误
     SYS_ERROR("999"),
     ;

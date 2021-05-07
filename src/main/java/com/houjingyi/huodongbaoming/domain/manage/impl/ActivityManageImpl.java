@@ -1,6 +1,7 @@
 package com.houjingyi.huodongbaoming.domain.manage.impl;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.houjingyi.huodongbaoming.common.constant.ErrorMessageConstants;
 import com.houjingyi.huodongbaoming.common.enums.ActivityStatusEnums;
 import com.houjingyi.huodongbaoming.common.enums.UserActivitySignupStatusEnums;
 import com.houjingyi.huodongbaoming.common.exception.BusinessException;
@@ -36,7 +37,7 @@ public class ActivityManageImpl implements ActivityManage {
     public synchronized void signup(Long id) {
         Activity entity = this.activityService.getById(id);
         if (entity == null) {
-            throw new NoLogException("活动不存在");
+            throw new NoLogException(ErrorMessageConstants.NOT_FOUND_ACTIVITY);
         }
         // 判断活动状态
         if (!ActivityStatusEnums.PASS.getCode().equals(entity.getStatus())) {
@@ -78,10 +79,10 @@ public class ActivityManageImpl implements ActivityManage {
     public synchronized void cancel(Long id) {
         Activity entity = this.activityService.getById(id);
         if (entity == null) {
-            throw new BusinessException("活动不存在");
+            throw new BusinessException(ErrorMessageConstants.NOT_FOUND_ACTIVITY);
         }
         // 判断活动状态
-        if (entity.getStatus() != ActivityStatusEnums.PASS.getCode()) {
+        if (!entity.getStatus().equals(ActivityStatusEnums.PASS.getCode())) {
             throw new BusinessException("活动不为通过状态，不允许报名");
         }
         // 取消报名活动
@@ -100,10 +101,10 @@ public class ActivityManageImpl implements ActivityManage {
     public void signIn(Long id) {
         Activity activity = this.activityService.getById(id);
         if (activity == null) {
-            throw new BusinessException("活动不存在");
+            throw new BusinessException(ErrorMessageConstants.NOT_FOUND_ACTIVITY);
         }
         // 判断活动状态
-        if (activity.getStatus() != ActivityStatusEnums.PASS.getCode()) {
+        if (!activity.getStatus().equals(ActivityStatusEnums.PASS.getCode())) {
             throw new BusinessException("活动不为通过状态，不允许签到");
         }
         UserActivity userActivity = userActivityService.getByActivityIdAndUserId(id);

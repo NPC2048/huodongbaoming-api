@@ -1,7 +1,6 @@
 package com.houjingyi.huodongbaoming.config;
 
 import cn.dev33.satoken.interceptor.SaRouteInterceptor;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -10,7 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  *
  * @author yuelong.liang
  */
-@Configuration
 public class SaTokenConfig implements WebMvcConfigurer {
 
     @Override

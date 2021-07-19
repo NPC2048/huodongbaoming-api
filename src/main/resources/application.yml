@@ -43,3 +43,5 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     use-actual-param-name: true
     cache-enabled: false
+gravatar:
+  proxy: https://avatar.npc2048.workers.dev/avatar/

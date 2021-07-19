@@ -15,6 +15,7 @@
     <description>活动报名 project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
+        <guava.version>30.1.1-jre</guava.version>
     </properties>
     <dependencies>
         <dependency>
@@ -108,6 +109,11 @@
             <groupId>com.github.kevinsawicki</groupId>
             <artifactId>http-request</artifactId>
             <version>6.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
         </dependency>
     </dependencies>
 

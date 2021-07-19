@@ -20,8 +20,4 @@
         where name = #{username}
           and u.password = #{password}
     </select>
-    <insert id="insert">
-        insert ignore into hd_user(id, name, email, password, create_time)
-        values (#{id}, #{name}, #{email}, #{password}, #{createTime})
-    </insert>
 </mapper>

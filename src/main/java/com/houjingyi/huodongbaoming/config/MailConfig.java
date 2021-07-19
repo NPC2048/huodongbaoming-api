@@ -6,14 +6,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * 邮件发送配置
  *
  * @author yuelong.liang
  */
-@Configuration
 @AllArgsConstructor
 @Slf4j
 public class MailConfig implements InitializingBean {

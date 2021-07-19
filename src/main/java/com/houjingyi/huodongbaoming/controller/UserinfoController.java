@@ -9,11 +9,12 @@ import com.houjingyi.huodongbaoming.common.form.user.ModifyPassForm;
 import com.houjingyi.huodongbaoming.common.form.user.ModifyUserinfoForm;
 import com.houjingyi.huodongbaoming.common.result.R;
 import com.houjingyi.huodongbaoming.common.result.Results;
+import com.houjingyi.huodongbaoming.config.GravatarConfig;
 import com.houjingyi.huodongbaoming.domain.entity.User;
 import com.houjingyi.huodongbaoming.domain.model.vo.UserinfoVO;
 import com.houjingyi.huodongbaoming.domain.service.RoleService;
 import com.houjingyi.huodongbaoming.domain.service.UserService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.util.DigestUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Validated
 public class UserinfoController {
 
@@ -39,13 +40,14 @@ public class UserinfoController {
 
     private final UserConverter userConverter;
 
+    private final GravatarConfig gravatarConfig;
+
     @GetMapping("/info")
     public R info() {
         User user = userService.getById(StpUtil.getLoginIdAsString());
         String emailMd5 = DigestUtils.md5DigestAsHex(user.getEmail().getBytes(StandardCharsets.UTF_8));
-        String url = "https://study5.icanokok.com/avatar/" + emailMd5 + "?s=64&d=identicon";
         UserinfoVO vo = userConverter.toVO(user);
-        vo.setGratavar(url);
+        vo.setGratavar(gravatarConfig.getProxy() + emailMd5 + "?s=64&d=identicon");
         return Results.success(vo);
     }
 
@@ -100,8 +102,7 @@ public class UserinfoController {
     @GetMapping("/avatar-url")
     public R avatarUrl(@NotBlank(message = "邮箱不能为空") String email) {
         String emailMd5 = DigestUtils.md5DigestAsHex(email.getBytes(StandardCharsets.UTF_8));
-        String url = "https://study5.icanokok.com/avatar/" + emailMd5 + "?s=64&d=identicon";
-        return Results.success(url);
+        return Results.success(gravatarConfig.getProxy() + emailMd5 + "?s=64&d=identicon");
     }
 
 

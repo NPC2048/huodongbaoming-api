@@ -20,4 +20,5 @@ public interface UserMapper extends BaseMapper<User> {
      * @return User
      */
     User get(String username, String password);
+
 }

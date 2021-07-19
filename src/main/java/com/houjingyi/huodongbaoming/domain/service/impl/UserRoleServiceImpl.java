@@ -24,13 +24,13 @@ public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> i
 
     @Override
     public void join(Long userId, String roleName) {
+        if (userId == null) {
+            throw new BusinessException("关联角色失败, 用户 id 不能为空");
+        }
         // 查询角色
         Role role = roleService.getOne(Wrappers.<Role>lambdaQuery().eq(Role::getName, roleName));
         if (role == null) {
             throw new BusinessException("关联角色失败，" + roleName + "不存在");
-        }
-        if (userId == null) {
-            throw new BusinessException("关联角色失败, 用户 id 不能为空");
         }
         this.save(UserRole.builder().roleId(role.getId()).userId(userId).build());
     }

@@ -14,6 +14,7 @@ import com.houjingyi.huodongbaoming.domain.service.UserRoleService;
 import com.houjingyi.huodongbaoming.domain.service.UserService;
 import com.houjingyi.huodongbaoming.domain.service.base.impl.BaseServiceImpl;
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,6 +67,15 @@ public class UserServiceImpl extends BaseServiceImpl<UserMapper, User> implement
     public User loginByEmail(LoginForm form) {
         return baseMapper.selectOne(Wrappers.<User>lambdaQuery().eq(User::getName, form.getUsername())
                 .eq(User::getPassword, DigestUtil.sha256Hex(form.getPassword())));
+    }
+
+    @Override
+    public boolean checkAdminPassword(String password) {
+        if (StringUtils.isBlank(password)) {
+            return false;
+        }
+        return SqlHelper.retBool(this.lambdaQuery().eq(User::getName, "admin")
+                .eq(User::getPassword, DigestUtil.sha256Hex(password)).count());
     }
 
     @Override

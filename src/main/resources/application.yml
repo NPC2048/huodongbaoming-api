@@ -45,3 +45,15 @@ mybatis-plus:
     cache-enabled: false
 gravatar:
   proxy: https://avatar.npc2048.workers.dev/avatar/
+route:
+  auth-list: /**
+  exclude-list:
+  - /user/login-email
+  - /user/login-email
+  - /activity/list
+  - /menu/menus
+  - /user/mail-code
+  - /user/register
+  - /user/forget-code
+  - /user/modify-pass-by-email
+  - /system/shutdown

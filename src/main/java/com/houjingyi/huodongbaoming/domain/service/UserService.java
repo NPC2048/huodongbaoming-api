@@ -45,4 +45,11 @@ public interface UserService extends BaseService<User> {
      * @return User
      */
     User loginByEmail(LoginForm form);
+
+    /**
+     * 检查管理员密码是否正确
+     * @param password 密码原文
+     * @return 检查结果
+     */
+    boolean checkAdminPassword(String password);
 }

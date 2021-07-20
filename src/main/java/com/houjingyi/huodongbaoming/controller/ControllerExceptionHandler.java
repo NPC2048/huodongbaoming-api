@@ -56,7 +56,7 @@ public class ControllerExceptionHandler {
 
     @ExceptionHandler
     public R notLoginException(NotLoginException e) {
-        log.warn(e.getLoginKey() + ":" + e.getMessage());
+        log.warn(e.getLoginType() + ":" + e.getMessage());
         return Results.failed(ResultCodeEnum.NO_LOGIN);
     }
 

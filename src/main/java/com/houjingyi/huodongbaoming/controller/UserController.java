@@ -110,7 +110,7 @@ public class UserController {
      */
     @RequestMapping("/mail-code")
     public R getCode(@Valid @RequestBody MailCodeForm form) throws MessagingException {
-        log.info("========== loginKey: " + StpUtil.getLoginKey() + ", sessionId: " + StpUtil.getTokenValue());
+        log.info("========== loginKey: {}, sessionId: {}", StpUtil.getLoginId(), StpUtil.getTokenValue());
         String code = EMAIL_CODE_CACHE.get(form.getEmail(), false);
         if (code != null) {
             return Results.failed(ErrorMessageConstants.GET_CODE_TO_MANY);
@@ -134,11 +134,11 @@ public class UserController {
             return Results.failed(ResultCodeEnum.INVALID_USER);
         }
         // 设置 login id
-        StpUtil.setLoginId(user.getId(), "mobile");
+        StpUtil.login(user.getId(), "mobile");
         // 查询用户角色和菜单
         List<String> roleNameList = roleService.listRoleNameByUserId(user.getId());
         // 判断是否为管理员
-        StpUtil.getTokenSession().setAttribute(GlobalConstants.SESSION_ROLE, roleNameList);
+        StpUtil.getTokenSession().set(GlobalConstants.SESSION_ROLE, roleNameList);
         // 查询菜单
         List<MenuVO> menuList = menuService.listMenuByLoginId();
         // 用户头像信息

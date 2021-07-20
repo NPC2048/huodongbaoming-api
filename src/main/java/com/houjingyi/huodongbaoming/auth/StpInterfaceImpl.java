@@ -47,7 +47,7 @@ public class StpInterfaceImpl implements StpInterface {
         log.info("========== loginId: " + loginId + ", loginKey: " + loginKey + " getRoleList ==========");
         boolean isAdmin = AuthUtil.isAdmin();
         log.info("========== isAdmin: " + isAdmin);
-        Object role = StpUtil.getTokenSession().getAttribute(GlobalConstants.SESSION_ROLE);
+        Object role = StpUtil.getTokenSession().get(GlobalConstants.SESSION_ROLE);
         return (List<String>) role;
     }
 }

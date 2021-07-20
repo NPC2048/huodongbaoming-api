@@ -19,7 +19,7 @@ public class AuthUtil {
      * @return boolean
      */
     public static boolean isAdmin() {
-        Object isAdmin = StpUtil.getSession().getAttribute(GlobalConstants.SESSION_IS_ADMIN);
+        Object isAdmin = StpUtil.getSession().get(GlobalConstants.SESSION_IS_ADMIN);
         return isAdmin != null;
     }
 
